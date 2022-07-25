@@ -1,13 +1,14 @@
 .footer {
     display: flex;
     align-items: center;
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
-    background: #292929;
+    background: #1f1f1f;
 }

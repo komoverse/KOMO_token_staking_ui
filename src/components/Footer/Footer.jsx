@@ -3,6 +3,6 @@ import './styles.css';
 
 export const Footer = () => (
     <div className="footer">
-        Copyright 2022 PT Komodo Legends Interaktif
+        Copyright &copy; 2022 Komoverse
     </div>
 )

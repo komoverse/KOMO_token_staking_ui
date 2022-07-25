@@ -462,7 +462,7 @@ export const Body = () => {
                 setStakeTimeA('No Staked');
 
             if ((((new Date().getTime()) / 1000) - (accountData.stakeTimeA.toNumber())) > stakeDurationA) {
-                let stakedAmount = (((accountData.balanceStakedA.toNumber() / (10 ** token_decimal)) * (APY_A / 100)) * 7 / (24 * 60 * 60)).toFixed(4);
+                let stakedAmount = (((accountData.balanceStakedA.toNumber() / (10 ** token_decimal)) * (APY_A / 100)) * 7 / (24 * 60 * 60)).toFixed(2);
                 if (stakedAmount > 0.00001) {
                     setALock(1)
 
@@ -483,7 +483,7 @@ export const Body = () => {
                 :
                 setStakeTimeB('No Staked');
             if ((((new Date().getTime()) / 1000) - (accountData.stakeTimeB.toNumber())) > stakeDurationB) {
-                let stakedAmount = (((accountData.balanceStakedB.toNumber() / (10 ** token_decimal)) * (APY_B / 100)) * 14 / (24 * 60 * 60)).toFixed(4);
+                let stakedAmount = (((accountData.balanceStakedB.toNumber() / (10 ** token_decimal)) * (APY_B / 100)) * 14 / (24 * 60 * 60)).toFixed(2);
                 if (stakedAmount > 0.00001) {
                     setBLock(1)
                 }
@@ -504,7 +504,7 @@ export const Body = () => {
                 setStakeTimeC('No Staked');
             if ((((new Date().getTime()) / 1000) - (accountData.stakeTimeC.toNumber())) > stakeDurationC) {
                 setCLock(0)
-                let stakedAmount = (((accountData.balanceStakedC.toNumber() / (10 ** token_decimal)) * (APY_C / 100)) *30 / (24 * 60 * 60)).toFixed(4);
+                let stakedAmount = (((accountData.balanceStakedC.toNumber() / (10 ** token_decimal)) * (APY_C / 100)) *30 / (24 * 60 * 60)).toFixed(2);
                 if (stakedAmount > 0.00001) {
                     setCLock(1)
                 }
@@ -525,7 +525,7 @@ export const Body = () => {
                 setStakeTimeD('No Staked');
             if ((((new Date().getTime()) / 1000) - (accountData.stakeTimeD.toNumber())) > stakeDurationD) {
                 setDLock(0)
-                let stakedAmount = (((accountData.balanceStakedD.toNumber() / (10 ** token_decimal)) * (APY_D / 100)) * 90 / (24 * 60 * 60)).toFixed(4);
+                let stakedAmount = (((accountData.balanceStakedD.toNumber() / (10 ** token_decimal)) * (APY_D / 100)) * 90 / (24 * 60 * 60)).toFixed(2);
                 if (stakedAmount > 0.00001) {
                     setDLock(1)
                 }
@@ -546,7 +546,7 @@ export const Body = () => {
                 setStakeTimeE('No Staked');
             if ((((new Date().getTime()) / 1000) - (accountData.stakeTimeE.toNumber())) > stakeDurationE) {
                 setELock(0)
-                let stakedAmount = (((accountData.balanceStakedE.toNumber() / (10 ** token_decimal)) * (APY_E / 100)) * 180 / (24 * 60 * 60)).toFixed(4)
+                let stakedAmount = (((accountData.balanceStakedE.toNumber() / (10 ** token_decimal)) * (APY_E / 100)) * 180 / (24 * 60 * 60)).toFixed(2)
                 if (stakedAmount > 0.00001) {
                     setELock(1)
                 }
@@ -567,7 +567,7 @@ export const Body = () => {
                 setStakeTimeF('No Staked');
             if ((((new Date().getTime()) / 1000) - (accountData.stakeTimeF.toNumber())) > stakeDurationF) {
                 setFLock(0)
-                let stakedAmount = (((accountData.balanceStakedF.toNumber() / (10 ** token_decimal)) * (APY_F / 100)) * 365 / (24 * 60 * 60)).toFixed(4);
+                let stakedAmount = (((accountData.balanceStakedF.toNumber() / (10 ** token_decimal)) * (APY_F / 100)) * 365 / (24 * 60 * 60)).toFixed(2);
                 if (stakedAmount > 0.00001) {
                     setFLock(1)
                 }
@@ -636,264 +636,210 @@ export const Body = () => {
     }, [wallet.publicKey])
 
     return (
-        <div className="main">
-            <div className="main__block">
-                <p className="main__block-title">KOMO Token Staking</p>
-                <div className="main__block-balance">
-                    <p className="main__block-balance-sub">Balance</p>
-                    <p className="main__block-balance-value">{balance ? balance.toFixed(2) : 0} KOMO</p>
-                </div>
-                <div className="main__block-stake-block">
-                    <p className="main__block-stake-block--title">Stake Amount</p>
-                    <div className="main__block-stake-block--input-gr">
-                    <input className="main__block-stake-block--input" value={xtagStakeAmount} step="0.01" type="number" onChange={e => {
-                                const amount = e.target.value;
-                                if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-                                  setXtagStakeAmount(amount)
-                                }
-                            }} /> KOMO
-                    </div>
-                </div>
-                <div className="main__block-duration-block">
-                    <p className="main__block-stake-block--title">Duration</p>
-                    <div className="main__block-duration-block--buttons">
-                        {
-                            buttons.map(button => (
-                                <button
-                                    onClick={() => choiseDuration(button.id)}
-                                    key={button.id}
-                                    className={
-                                        `main__block-duration-block--buttons-btn
-                                         ${ button.isActive && 'active'}`
+        <div className="container-fluid">
+            <div className="row m-0">
+                <div className="col-12 col-md-3 p-3">
+                    <div className='p-4 ylbr'>
+                        <center>
+                            <h3>KOMO Token Staking</h3>
+                        </center>
+                        <p className="mt-3">Balance</p>
+                        <h3>{balance ? balance.toFixed(2) : 0} KOMO</h3>
+
+                        <p className="mt-3">Stake Amount</p>
+                        <input type="number" className="form-control w-50 d-inline" value={xtagStakeAmount} step={0.01} onChange={e => {
+                                    const amount = e.target.value;
+                                    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+                                    setXtagStakeAmount(amount)
                                     }
-                                >
-                                    {button.durName}
+                                }} /> KOMO
+                        <p className="mt-3">Duration</p>
+                        <div className="main__block-duration-block--buttons">
+                            {
+                                buttons.map(button => (
+                                    <button
+                                        onClick={() => choiseDuration(button.id)}
+                                        key={button.id}
+                                        className={
+                                            `main__block-duration-block--buttons-btn
+                                            ${ button.isActive && 'active'}`
+                                        }
+                                    >
+                                        {button.durName}
+                                    </button>
+                                ))
+                            }
+                        </div>
+
+                        <p className='mt-3'>APY</p>
+                        <h3>50% APY</h3>
+
+                        {isUser == 0 ?
+                            <button className='btn mt-2 form-control btn-lg btn-success' onClick={() => createStakeAccount()}>
+                                Create Account
+                            </button>
+                            : 
+                            <div>
+                                <button className='btn mt-2 form-control btn-lg btn-success' onClick={() => stake()}>
+                                    Stake Token
                                 </button>
-                            ))
+                                <button className='btn mt-2 form-control btn-lg btn-success' onClick={() => fund()}>
+                                    Fund Token
+                                </button>
+                            </div>
                         }
                     </div>
                 </div>
-                <div className="main__block-apy-block">
-                    <p className="main__block-apy-block-title">APY</p>
-                    <p className="main__block-apy-block-info">50% APY</p>
-                </div>
-                {isUser == 0 ?
-                        <button className="main__block-stake-btn" onClick={() => createStakeAccount()}>
-                            Create Account
-                        </button>
-                        : ''
-                }
-                <div className="main_create-account">
-                </div>
-                <button className="main__block-stake-btn" onClick={() => stake()}>
-                    Stake Token
-                </button> 
-                <div className="main_create-account">
-                </div>
-                <button className="main__block-stake-btn" onClick={() => fund()}>
-                    Fund Token
-                </button>                 
-            </div>
-            <div className="main__block">
-                <p className="main__block-title">Portfolio</p>
-                <div className="main__block-portfolio-blocks">
-                    <div className="main__block-portfolio-block">
-                        <div className="block-info main__block-portfolio-block--stake-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Stake Amount / Duration</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakedAmountA} KOMO / 7 days
-                            </p>
+                <div className="col-12 col-md-9 p-3">
+                    <div className="p-4 ylbr">
+                        <center>
+                            <h3>Portfolio</h3>
+                        </center>
+                        <div className="table-responsive">
+                        <table className="table text-light">
+                            <tbody>
+                            
+                            <tr className={(stakedAmountA == 0 ? 'text-secondary':'')}>
+                                <td>
+                                    Stake Amount / Duration
+                                    <h5>{stakedAmountA} KOMO / 7 days</h5>
+                                </td>
+                                <td>
+                                    Staking Time
+                                    <h5>{stakeTimeA}</h5>
+                                </td>
+                                <td>
+                                    APY
+                                    <h5>50% APY</h5>
+                                </td>
+                                <td>
+                                    Reward
+                                    <h5>+{rewardAmountA} KOMO</h5>
+                                </td>
+                                <td>
+                                    <button {...(stakedAmountA == 0 ? {disabled:'disabled'} : '')} className="btn btn-primary btn-lg px-3" onClick={() => unstake(7)}>
+                                        Get Reward
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className={(stakedAmountB == 0 ? 'text-secondary':'')}>
+                                <td>
+                                    Stake Amount / Duration
+                                    <h5>{stakedAmountB} KOMO / 14 days</h5>
+                                </td>
+                                <td>
+                                    Staking Time
+                                    <h5>{stakeTimeB}</h5>
+                                </td>
+                                <td>
+                                    APY
+                                    <h5>50% APY</h5>
+                                </td>
+                                <td>
+                                    Reward
+                                    <h5>+{rewardAmountB} KOMO</h5>
+                                </td>
+                                <td>
+                                    <button {...(stakedAmountB == 0 ? {disabled:'disabled'} : '')}  className="btn btn-primary btn-lg px-3" onClick={() => unstake(14)}>
+                                        Get Reward
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className={(stakedAmountC == 0 ? 'text-secondary':'')}>
+                                <td>
+                                    Stake Amount / Duration
+                                    <h5>{stakedAmountC} KOMO / 30 days</h5>
+                                </td>
+                                <td>
+                                    Staking Time
+                                    <h5>{stakeTimeC}</h5>
+                                </td>
+                                <td>
+                                    APY
+                                    <h5>50% APY</h5>
+                                </td>
+                                <td>
+                                    Reward
+                                    <h5>+{rewardAmountC} KOMO</h5>
+                                </td>
+                                <td>
+                                    <button {...(stakedAmountC == 0 ? {disabled:'disabled'} : '')} className="btn btn-primary btn-lg px-3" onClick={() => unstake(30)}>
+                                        Get Reward
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className={(stakedAmountD == 0 ? 'text-secondary':'')}>
+                                <td>
+                                    Stake Amount / Duration
+                                    <h5>{stakedAmountD} KOMO / 90 days</h5>
+                                </td>
+                                <td>
+                                    Staking Time
+                                    <h5>{stakeTimeD}</h5>
+                                </td>
+                                <td>
+                                    APY
+                                    <h5>50% APY</h5>
+                                </td>
+                                <td>
+                                    Reward
+                                    <h5>+{rewardAmountD} KOMO</h5>
+                                </td>
+                                <td>
+                                    <button {...(stakedAmountD == 0 ? {disabled:'disabled'} : '')} className="btn btn-primary btn-lg px-3" onClick={() => unstake(90)}>
+                                        Get Reward
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className={(stakedAmountE == 0 ? 'text-secondary':'')}>
+                                <td>
+                                    Stake Amount / Duration
+                                    <h5>{stakedAmountE} KOMO / 180 days</h5>
+                                </td>
+                                <td>
+                                    Staking Time
+                                    <h5>{stakeTimeE}</h5>
+                                </td>
+                                <td>
+                                    APY
+                                    <h5>50% APY</h5>
+                                </td>
+                                <td>
+                                    Reward
+                                    <h5>+{rewardAmountE} KOMO</h5>
+                                </td>
+                                <td>
+                                    <button {...(stakedAmountE == 0 ? {disabled:'disabled'} : '')} className="btn btn-primary btn-lg px-3" onClick={() => unstake(180)}>
+                                        Get Reward
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className={(stakedAmountF == 0 ? 'text-secondary':'')}>
+                                <td>
+                                    Stake Amount / Duration
+                                    <h5>{stakedAmountF} KOMO / 365 days</h5>
+                                </td>
+                                <td>
+                                    Staking Time
+                                    <h5>{stakeTimeF}</h5>
+                                </td>
+                                <td>
+                                    APY
+                                    <h5>50% APY</h5>
+                                </td>
+                                <td>
+                                    Reward
+                                    <h5>+{rewardAmountF} KOMO</h5>
+                                </td>
+                                <td>
+                                    <button {...(stakedAmountF == 0 ? {disabled:'disabled'} : '')} className="btn btn-primary btn-lg px-3" onClick={() => unstake(365)}>
+                                        Get Reward
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                         </div>
-
-                        <div className="block-info main__block-portfolio-block--remaining-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Staking Time</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakeTimeA} 
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--apy-info">
-                            <p className="main__block-portfolio-block--stake-info-title">APY</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                50%
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--reward-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Reward</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                +{rewardAmountA} KOMO
-                            </p>
-                        </div>
-
-                        <button className="btn get-reward-btn" onClick={() => unstake(7)}>
-                            Get Reward
-                        </button>
-                    </div>
-                    <div className="main__block-portfolio-block">
-                        <div className="block-info main__block-portfolio-block--stake-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Stake Amount / Duration</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakedAmountB} KOMO / 14 days
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--remaining-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Staking Time</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakeTimeB} 
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--apy-info">
-                            <p className="main__block-portfolio-block--stake-info-title">APY</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                50%
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--reward-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Reward</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                +{rewardAmountB} KOMO
-                            </p>
-                        </div>
-
-                        <button className="btn get-reward-btn" onClick={() => unstake(14)}>
-                            Get Reward
-                        </button>
-                    </div>
-                    <div className="main__block-portfolio-block">
-                        <div className="block-info main__block-portfolio-block--stake-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Stake Amount / Duration</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakedAmountC} KOMO / 30 days
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--remaining-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Staking Time</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakeTimeC} 
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--apy-info">
-                            <p className="main__block-portfolio-block--stake-info-title">APY</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                50%
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--reward-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Reward</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                +{rewardAmountC} KOMO
-                            </p>
-                        </div>
-
-                        <button className="btn get-reward-btn" onClick={() => unstake(30)}>
-                            Get Reward
-                        </button>
-                    </div>
-                    <div className="main__block-portfolio-block">
-                        <div className="block-info main__block-portfolio-block--stake-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Stake Amount / Duration</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakedAmountD} KOMO / 90 days
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--remaining-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Staking Time</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakeTimeD} 
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--apy-info">
-                            <p className="main__block-portfolio-block--stake-info-title">APY</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                50%
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--reward-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Reward</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                +{rewardAmountD} KOMO
-                            </p>
-                        </div>
-
-                        <button className="btn get-reward-btn" onClick={() => unstake(90)}>
-                            Get Reward
-                        </button>
-                    </div>
-                    <div className="main__block-portfolio-block">
-                        <div className="block-info main__block-portfolio-block--stake-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Stake Amount / Duration</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakedAmountE} KOMO / 180 days
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--remaining-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Staking Time</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakeTimeE} 
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--apy-info">
-                            <p className="main__block-portfolio-block--stake-info-title">APY</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                50%
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--reward-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Reward</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                +{rewardAmountE} KOMO
-                            </p>
-                        </div>
-
-                        <button className="btn get-reward-btn" onClick={() => unstake(180)}>
-                            Get Reward
-                        </button>
-                    </div>
-                    <div className="main__block-portfolio-block">
-                        <div className="block-info main__block-portfolio-block--stake-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Stake Amount / Duration</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakedAmountF} KOMO / 365 days
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--remaining-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Staking Time</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                {stakeTimeF} 
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--apy-info">
-                            <p className="main__block-portfolio-block--stake-info-title">APY</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                50%
-                            </p>
-                        </div>
-
-                        <div className="block-info main__block-portfolio-block--reward-info">
-                            <p className="main__block-portfolio-block--stake-info-title">Reward</p>
-                            <p className="main__block-portfolio-block--stake-info-data">
-                                +{rewardAmountF} KOMO
-                            </p>
-                        </div>
-
-                        <button className="btn get-reward-btn" onClick={() => unstake(365)}>
-                            Get Reward
-                        </button>
                     </div>
                 </div>
             </div>
